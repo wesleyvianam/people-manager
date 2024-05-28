@@ -1,0 +1,9 @@
+{
+  "name": "people-manager/back-end",
+  "description": "Api php",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}
