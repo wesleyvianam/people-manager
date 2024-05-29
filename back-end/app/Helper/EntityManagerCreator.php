@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Easy\Wallet\Helper;
+namespace App\Helper;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
@@ -19,11 +19,11 @@ class EntityManagerCreator
 
         $connectionParams = [
             'driver' => 'pdo_mysql',
-            'host' => 'easy-db',
+            'host' => 'mysql',
             'port' => '3306',
-            'dbname' => 'easywallet',
+            'dbname' => 'app',
             'user' => 'wesley',
-            'password' => 'P@ssw0rd',
+            'password' => 'e46a73d1',
             'charset' => 'utf8mb4',
         ];
 

@@ -1,6 +1,6 @@
 services:
   php:
-    container_name: back-end
+    container_name: api
     build: back-end/
     volumes:
       - ./back-end/:/var/www/
@@ -42,12 +42,12 @@ services:
 
   db:
     image: mysql:latest
-    container_name: easy-db
+    container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: mariadb
-      MYSQL_DATABASE: easywallet
+      MYSQL_ROOT_PASSWORD: e46a73d1
+      MYSQL_DATABASE: app
       MYSQL_USER: wesley
-      MYSQL_PASSWORD: P@ssw0rd
+      MYSQL_PASSWORD: e46a73d1
     networks:
       - people_manager
 

@@ -2,23 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Easy\Wallet\Domain\Entity;
+namespace App\Domain\Entity;
 
+use App\Domain\Enum\ContactTypeEnum;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
+#[Table(name: 'contacts')]
 class Contact
 {
     #[Id, Column, GeneratedValue]
     private int $id;
 
-    #[Column]
+    #[Column(length: 100)]
     private string $contact;
+
+    #[Column]
+    private int $type;
 
     #[ManyToOne(targetEntity: Person::class, inversedBy: 'contacts')]
     private Person $person;
@@ -41,6 +46,17 @@ class Contact
     public function setPerson(Person $person): void
     {
         $this->person = $person;
+    }
+
+    public function getType(): string
+    {
+        $contactType = ContactTypeEnum::from($this->type);
+        return $contactType->getName();
+    }
+
+    public function setType(int $type): void
+    {
+        $this->type = $type;
     }
 
     /**

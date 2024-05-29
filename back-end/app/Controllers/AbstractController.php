@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Easy\Wallet\Controllers;
+namespace App\Controllers;
 
 use Psr\Http\Server\RequestHandlerInterface;
 

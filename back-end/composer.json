@@ -1,12 +1,9 @@
 {
-  "name": "easy-wallet/easy-wallet-api",
+  "name": "productm-manager/api",
   "autoload": {
     "psr-4": {
-      "Easy\\Wallet\\": "app/"
+      "App\\": "app/"
     }
-  },
-  "scripts": {
-    "test": "phpunit"
   },
   "require": {
     "vlucas/phpdotenv": "^5.5",
