@@ -1,0 +1,56 @@
+services:
+  php:
+    container_name: back-end
+    build: back-end/
+    volumes:
+      - ./back-end/:/var/www/
+      - /var/www/vendor/
+    depends_on:
+      - web
+      - db
+    networks:
+      - people_manager
+
+  web:
+    image: node:latest
+    container_name: web
+    volumes:
+      - ./front-end:/app
+      - type: bind
+        source: ./front.sh
+        target: /app/entrypoint.sh
+    working_dir: /app
+    command: sh ./entrypoint.sh
+    ports:
+      - 4200:4200
+    networks:
+      - people_manager
+
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./back-end:/var/www
+      - ./back-end/docker/nginx/:/etc/nginx/conf.d/
+    depends_on:
+      - web
+      - php
+    networks:
+      - people_manager
+
+  db:
+    image: mysql:latest
+    container_name: easy-db
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+      MYSQL_DATABASE: easywallet
+      MYSQL_USER: wesley
+      MYSQL_PASSWORD: P@ssw0rd
+    networks:
+      - people_manager
+
+networks:
+  people_manager:
+    driver: bridge

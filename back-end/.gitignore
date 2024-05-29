@@ -1,0 +1,5 @@
+/.env
+/.idea
+/vendor/
+./.phpunit.cache/
+./testdox.txt
