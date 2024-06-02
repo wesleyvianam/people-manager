@@ -9,7 +9,7 @@ services:
       - web
       - db
     env_file:
-      - ./back-end/.env
+      - ./.env
     networks:
       - people_manager
 
