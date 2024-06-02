@@ -12,7 +12,7 @@ const Show = ({item}) => {
                     </p>
                 ))
             ) : (
-                <p>Nenhum contato disponível</p>
+                <i className='px-1 text-gray-700'>Nenhum contato cadastrado</i>
             )}
         </div>
     )
