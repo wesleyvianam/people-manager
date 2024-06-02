@@ -11,22 +11,17 @@ import { getData } from '../services/apiService';
 function Person() {
     const [query, setQuery] = useState('');
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
     const {modal, currentItem, openModal, closeModal} = useModal();
     const [message, setMessage] = useState(null);
     const [messageType, setMessageType] = useState(null);
 
     const fetchData = async (searchQuery = '') => {
-        setLoading(true);
-
         try {
             const result = await getData('person?search='+searchQuery);
             setData(result);
         } catch (error) {
             setMessage(error.message);
             setMessageType('info');
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -39,6 +34,11 @@ function Person() {
         setMessageType(null);
     };
 
+    const handleSearch = (event) => {
+        setQuery(event.target.value);
+        fetchData(event.target.value);
+    };
+
     return (
         <div className='xl:w-4/5 2xl:w-2/3 m-auto'>
             <Navigation query={query} setQuery={setQuery} openModal={openModal} />
@@ -46,7 +46,19 @@ function Person() {
             {(message && modal === null) && <Message type={messageType} message={message} onClose={handleClearMessage} />}
 
             <div>
-                {loading && <div>Carregando...</div>}
+                <div className="mx-4 border mb-4 p-3 rounded-md flex">
+                    <div className='pe-3 w-3/12'>
+                        <label className='block mb-2 text-sm font-medium text-gray-900'>Buscar</label>
+                        <input
+                            className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500'
+                            name="person_id"
+                            required
+                            value={query}
+                            placeholder='Search...'
+                            onChange={handleSearch}
+                        />
+                    </div>
+                </div>
 
                 {(data && data.length > 0) ? (
                     <div className='px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>

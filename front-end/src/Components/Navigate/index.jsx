@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import React from "react";
 
-const Navigation = ({ query, setQuery, openModal }) => {
+const Navigation = ({ openModal }) => {
     const location = useLocation();
 
     return (
@@ -16,23 +16,11 @@ const Navigation = ({ query, setQuery, openModal }) => {
 
                 <div className="flex md:order-2">
                     <button
-                        className='border rounded-md me-3 bg-red-500 text-white pe-3 ps-3'
+                        className='border rounded-md bg-red-500 text-white px-3 py-2'
                         onClick={() => openModal('add')}
                     >
                         Adicionar
                     </button>
-                    <div className="relative hidden md:block">
-                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <i className="w-4 h-4 text-gray-500 dark:text-gray-400"><IoSearch />
-                            </i>
-                            <span className="sr-only">Search icon</span>
-                        </div>
-                        <input type="text" id="search-navbar"
-                               className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                               value={query}
-                               onChange={(e) => setQuery(e.target.value)}
-                               placeholder="Search..."/>
-                    </div>
                 </div>
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
                      id="navbar-search">
