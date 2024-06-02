@@ -25,6 +25,10 @@ class ShowController extends AbstractController
 
         $res = $this->repository->findById($contactId);
 
-        return new Response(200, ['content-type' => 'application/json'], json_encode($res));
+        return new Response(
+            $res['code'],
+            ['Content-Type' => 'application/json'],
+            json_encode($res['data'])
+        );
     }
 }

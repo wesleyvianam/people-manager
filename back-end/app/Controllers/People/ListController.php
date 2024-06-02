@@ -25,12 +25,12 @@ class ListController extends AbstractController
 
         $res = empty($filter)
             ? $this->repository->findAll()
-            : $this->repository->findBy($filter['name']);
+            : $this->repository->findBy($filter['search']);
 
         return new Response(
-            200,
-            ['Content-Type' => 'application/json'],
-            json_encode($res)
+            $res['code'],
+            ['content-type' => 'application/json'],
+            json_encode($res['data'])
         );
     }
 }

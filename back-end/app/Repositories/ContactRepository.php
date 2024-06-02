@@ -23,6 +23,22 @@ class ContactRepository
         return $this->hydrateData($results);
     }
 
+    public function findBy(string $filter): Contact|array
+    {
+        /** @Contact */
+        $qb = $this->entityManager->getRepository(Contact::class)->createQueryBuilder('p')
+            ->where("p.contact LIKE :contact")
+            ->setParameter('contact', '%' . $filter . '%');
+
+        $results = $qb->getQuery()->getResult();
+
+        if (empty($results)) {
+            return ['code' => 200, 'data' => ['message' => 'Nenhuma contato foi encontrado']];
+        }
+
+        return $this->hydrateData($results);
+    }
+
     public function findById(int $id): array
     {
         $result = $this->entityManager->getRepository(Contact::class)->find($id);
@@ -30,12 +46,18 @@ class ContactRepository
         return $this->hydrateData([$result]);
     }
 
-    public function delete(int $id): void
+    public function delete(int $id): array
     {
-        $person = $this->entityManager->find(Contact::class, $id);
+        $contact = $this->entityManager->find(Contact::class, $id);
 
-        $this->entityManager->remove($person);
+        if (!$contact) {
+            return ["code" => 404, 'data' => ["message" => "Contato não encontrado"]];
+        }
+
+        $this->entityManager->remove($contact);
         $this->entityManager->flush();
+
+        return ["code" => 200, 'data' => ["message" => "Contato {$contact->getContact()} deletado com sucesso"]];
     }
 
     public function register(array $data): Contact|array
@@ -43,7 +65,7 @@ class ContactRepository
         $contact = new Contact();
 
         $contact->setContact($data["contact"]);
-        $contact->setType($data["type"]);
+        $contact->setType((int) $data["type"]);
 
         $person = $this->entityManager->getRepository(Person::class)->find($data["person_id"]);
         $contact->setPerson($person);
@@ -56,20 +78,27 @@ class ContactRepository
 
     public function update(int $id, array $data): array
     {
-        $person = $this->entityManager->find(Contact::class, $id);
+        $contact = $this->entityManager->find(Contact::class, $id);
 
-        if (isset($data['name'])) {
-            $person->setName($data['name']);
+        if (!$contact) {
+            return ["code" => 404, 'data' => ["message" => "Contato não encontrado"]];
         }
 
-        if (isset($data['cpf'])) {
-            $person->setCpf($data['cpf']);
+        if (isset($data['contact'])) {
+            $contact->setContact($data['contact']);
+        }
+
+        if (isset($data['type'])) {
+            $contact->setType((int) $data["type"]);
+        }
+
+        if (isset($data['person_id'])) {
+            $person = $this->entityManager->getRepository(Person::class)->find($data["person_id"]);
+            $contact->setPerson($person);
         }
 
         $this->entityManager->flush();
-        $data = $this->findById($person->getId());
-
-        return $this->hydrateData($data);
+        return $this->findById($contact->getId());
     }
 
     private function hydrateData(Contact|array $results): array
@@ -86,6 +115,8 @@ class ContactRepository
             }
         }
 
-        return $data ?? [];
+        return $data
+            ? ['code' => 200, 'data' => $data]
+            : ['code' => 500, 'data' => ['message' => 'Ocorreu um erro em tratar dados']];
     }
 }

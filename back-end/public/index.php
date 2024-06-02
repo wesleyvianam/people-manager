@@ -3,12 +3,10 @@
 declare(strict_types=1);
 
 use App\Controllers\NotFountController;
+use Dotenv\Dotenv;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/Controllers/NotFountController.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->safeLoad();
 
 /** @var \Psr\Container\ContainerInterface $diContainer */
 $diContainer = require_once __DIR__ . '/../config/dependencyInjection.php';
@@ -38,7 +36,7 @@ $key = "$httpMethod|$pathInfo";
 if (array_key_exists($key, $routes)) {
     $controllerClass = $routes["$httpMethod|$pathInfo"];
 
-    $controller =  $diContainer->get($controllerClass);
+    $controller = $diContainer->get($controllerClass);
 } else {
     $controller = new NotFountController();
 }
@@ -52,7 +50,7 @@ $creator = new \Nyholm\Psr7Server\ServerRequestCreator(
 );
 $serverRequest = $creator->fromGlobals();
 
-/** @var \psr\Http\Server\RequestHandlerInterface $controller */
+/** @var \Psr\Http\Server\RequestHandlerInterface $controller */
 $response = $controller->handle($serverRequest);
 
 http_response_code($response->getStatusCode());

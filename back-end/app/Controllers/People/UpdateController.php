@@ -24,10 +24,15 @@ class UpdateController extends AbstractController
         $userId = $this->getUserId($request->getServerParams()['REQUEST_URI']);
         $resData = $this->service->hydrateData($request);
 
+        $res = [];
         if (!empty($resData)) {
             $res = $this->repository->update($userId, $resData);
         }
 
-        return new Response(200, ['content-type' => 'application/json'], json_encode($res ?? []));
+        return new Response(
+            $res['code'],
+            ['content-type' => 'application/json'],
+            json_encode($res['data'])
+        );
     }
 }

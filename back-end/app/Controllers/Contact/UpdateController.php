@@ -22,12 +22,17 @@ class UpdateController extends AbstractController
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $userId = $this->getUserId($request->getServerParams()['REQUEST_URI']);
-        $resData = $this->service->hydrateData($request);
+        $resData = $this->service->hydrateData($request, ['contact','type','person_id']);
 
+        $res = [];
         if (!empty($resData)) {
             $res = $this->repository->update($userId, $resData);
         }
 
-        return new Response(200, ['content-type' => 'application/json'], json_encode($res ?? []));
+        return new Response(
+            $res['code'],
+            ['Content-Type' => 'application/json'],
+            json_encode($res['data'])
+        );
     }
 }

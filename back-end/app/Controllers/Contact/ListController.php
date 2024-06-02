@@ -23,14 +23,14 @@ class ListController extends AbstractController
     {
         $filter = $request->getQueryParams();
 
-        $res = empty($filter)
+        $res = !isset($filter['search'])
             ? $this->repository->findAll()
-            : $this->repository->findBy($filter['name']);
+            : $this->repository->findBy($filter['search']);
 
         return new Response(
             200,
             ['Content-Type' => 'application/json'],
-            json_encode($res)
+            json_encode($res['data'])
         );
     }
 }

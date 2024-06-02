@@ -11,7 +11,7 @@ enum ContactTypeEnum: int
     {
         return match ($this) {
             self::EMAIL => 'Email',
-            self::PHONE => 'Celular',
+            self::PHONE => 'Telefone',
         };
     }
 }

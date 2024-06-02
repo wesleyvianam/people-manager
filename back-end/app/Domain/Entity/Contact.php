@@ -48,10 +48,14 @@ class Contact
         $this->person = $person;
     }
 
-    public function getType(): string
+    public function getType(): string|int
     {
-        $contactType = ContactTypeEnum::from($this->type);
-        return $contactType->getName();
+        if ($this->type) {
+            $contactType = ContactTypeEnum::from($this->type);
+            return $contactType->getName();
+        }
+
+        return $this->type;
     }
 
     public function setType(int $type): void

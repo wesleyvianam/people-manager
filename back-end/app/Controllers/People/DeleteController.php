@@ -24,8 +24,12 @@ class DeleteController extends AbstractController
     {
         $userId = $this->getUserId($request->getServerParams()['REQUEST_URI']);
 
-        $this->repository->delete($userId);
+        $res = $this->repository->delete($userId);
 
-        return new Response(200, ['content-type' => 'application/json'], json_encode([]));
+        return new Response(
+            $res['code'],
+            ['content-type' => 'application/json'],
+            json_encode($res['data'])
+        );
     }
 }

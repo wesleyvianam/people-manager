@@ -21,13 +21,17 @@ class RegisterController extends AbstractController
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $resData = $this->service->hydrateData($request, ['name','cpf', 'contacts']);
+        $resData = $this->service->hydrateData($request, ['name','cpf','contact','type']);
 
-        $person = [];
+        $res = [];
         if (is_array($resData)) {
-            $person = $this->repository->register($resData);
+            $res = $this->repository->register($resData);
         }
 
-        return new Response(200, ['content-type' => 'application/json'], json_encode($person));
+        return new Response(
+            $res['code'],
+            ['content-type' => 'application/json'],
+            json_encode($res['data'])
+        );
     }
 }
