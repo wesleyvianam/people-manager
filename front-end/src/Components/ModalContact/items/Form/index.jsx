@@ -9,7 +9,10 @@ const Form = ({ closeModal, data, type, fetchData, setMessage, setMessageType })
     const getPeople = async () => {
         const result = await getData('person');
         setPeople(result);
-        setFormData(prevState => ({ ...prevState, person_id: result[0].id ?? null}));
+
+        if (type === 'add') {
+            setFormData(prevState => ({ ...prevState, person_id: result[0].id ?? null}));
+        }
     };
 
     const types = {
@@ -104,6 +107,7 @@ const Form = ({ closeModal, data, type, fetchData, setMessage, setMessageType })
                         name="person_id"
                         required
                     >
+                        {console.log(formData.person_id)}
                         {people && people.map((person, index) => (
                             <option key={index} value={person.id}>{person.name}</option>
                         ))}
