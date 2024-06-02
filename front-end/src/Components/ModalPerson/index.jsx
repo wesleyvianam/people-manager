@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { IoClose } from "react-icons/io5";
 
 import Show from './items/Show';

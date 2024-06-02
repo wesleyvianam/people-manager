@@ -3,7 +3,6 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa6";
 
 import Navigation from "../Components/Navigate/index.jsx";
-import ModalPerson from "../Components/ModalPerson/index.jsx";
 import Message from "../Components/Message/index.jsx";
 import { useModal } from "../services/useModal.js";
 import { getData } from '../services/apiService';

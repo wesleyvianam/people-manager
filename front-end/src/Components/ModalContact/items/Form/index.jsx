@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { cpfMask } from "../../../../services/cpfMask.js";
 import { phoneMask } from "../../../../services/phoneMask.js";
-import {getData, postData, putData} from "../../../../services/apiService.js";
-import message from "../../../Message/index.jsx";
-import {useModal} from "../../../../services/useModal.js";
+import { getData, postData, putData } from "../../../../services/apiService.js";
 
 const Form = ({ closeModal, data, type, fetchData, setMessage, setMessageType }) => {
     const [formData, setFormData] = useState({ contact: '', type: 1, person_id: ''});
@@ -12,6 +9,7 @@ const Form = ({ closeModal, data, type, fetchData, setMessage, setMessageType })
     const getPeople = async () => {
         const result = await getData('person');
         setPeople(result);
+        setFormData(prevState => ({ ...prevState, person_id: result[0].id ?? null}));
     };
 
     const types = {
@@ -30,25 +28,19 @@ const Form = ({ closeModal, data, type, fetchData, setMessage, setMessageType })
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const result = type === 'add'
-                ? await postData('contact', formData)
-                : await putData('contact/' + data.id, formData);
+        const result = type === 'add'
+            ? await postData('contact', formData)
+            : await putData('contact/' + data.id, formData);
 
+        if (await result) {
             const message = type === 'add'
                 ? 'Contato criado com sucesso'
                 : 'Contato atualizado com sucesso';
 
             setMessage(message);
             setMessageType('info');
+            fetchData();
             closeModal();
-
-            if (result) {
-                fetchData();
-            }
-        } catch (error) {
-            setMessage(`Atenção: ${error.message}`);
-            setMessageType('error');
         }
     };
 

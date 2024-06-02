@@ -1,4 +1,3 @@
-import {MdDelete} from "react-icons/md";
 import React from "react";
 import {deleteData} from "../../../../services/apiService.js";
 

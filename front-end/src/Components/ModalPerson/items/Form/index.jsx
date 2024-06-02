@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { cpfMask } from "../../../../services/cpfMask.js";
 import { phoneMask } from "../../../../services/phoneMask.js";
-import {getData, postData, putData} from "../../../../services/apiService.js";
-import message from "../../../Message/index.jsx";
+import { postData, putData } from "../../../../services/apiService.js";
 
 const Form = ({ closeModal, data, type, fetchData, setMessage, setMessageType }) => {
-    const [formData, setFormData] = useState({ name: '', cpf: '', contact: '', type: '' });
+    const [formData, setFormData] = useState({ name: '', cpf: '', contact: '', type: 1 });
 
     useEffect(() => {
         if (data) {
