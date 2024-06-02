@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 return [
     // Person
-    'POST|/api/user' => App\Controllers\People\RegisterController::class,
-    'GET|/api/user' => App\Controllers\People\ListController::class,
-    'GET|/api/user/{id}' => App\Controllers\People\ShowController::class,
-    'PUT|/api/user/{id}' => App\Controllers\People\UpdateController::class,
-    'DELETE|/api/user/{id}' => App\Controllers\People\DeleteController::class,
+    'POST|/api/person' => App\Controllers\People\RegisterController::class,
+    'GET|/api/person' => App\Controllers\People\ListController::class,
+    'GET|/api/person/{id}' => App\Controllers\People\ShowController::class,
+    'PUT|/api/person/{id}' => App\Controllers\People\UpdateController::class,
+    'DELETE|/api/person/{id}' => App\Controllers\People\DeleteController::class,
 
     'POST|/api/contact' => App\Controllers\Contact\RegisterController::class,
     'GET|/api/contact' => App\Controllers\Contact\ListController::class,
