@@ -23,12 +23,24 @@ class ContactRepository
         return $this->hydrateData($results);
     }
 
-    public function findBy(string $filter): Contact|array
+    public function findBy(array $filter): Contact|array
     {
         /** @Contact */
-        $qb = $this->entityManager->getRepository(Contact::class)->createQueryBuilder('p')
-            ->where("p.contact LIKE :contact")
-            ->setParameter('contact', '%' . $filter . '%');
+        $qb = $this->entityManager->getRepository(Contact::class)->createQueryBuilder('p');
+        if (isset($filter['search']) && $filter['search']) {
+            $qb->andWhere("p.contact LIKE :contact")
+                ->setParameter('contact', '%' . $filter['search'] . '%');
+        }
+
+        if (isset($filter['type']) && $filter['type']) {
+            $qb->andWhere("p.type = :type")
+                ->setParameter('type', $filter['type']);
+        }
+
+        if (isset($filter['person_id']) && $filter['person_id']) {
+            $qb->andWhere("p.person = :person_id")
+                ->setParameter('person_id', $filter['person_id']);
+        }
 
         $results = $qb->getQuery()->getResult();
 

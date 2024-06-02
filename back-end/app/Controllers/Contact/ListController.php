@@ -23,9 +23,9 @@ class ListController extends AbstractController
     {
         $filter = $request->getQueryParams();
 
-        $res = !isset($filter['search'])
+        $res = !isset($filter)
             ? $this->repository->findAll()
-            : $this->repository->findBy($filter['search']);
+            : $this->repository->findBy($filter);
 
         return new Response(
             200,
