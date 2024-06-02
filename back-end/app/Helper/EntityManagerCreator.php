@@ -7,11 +7,15 @@ namespace App\Helper;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use Dotenv\Dotenv;
 
 class EntityManagerCreator
 {
     public static function createEntityManager(): EntityManager
     {
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../../');
+        $dotenv->safeLoad();
+
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: [__DIR__ . "/.."],
             isDevMode: true,
@@ -21,9 +25,9 @@ class EntityManagerCreator
             'driver' => 'pdo_mysql',
             'host' => 'mysql',
             'port' => '3306',
-            'dbname' => 'app',
-            'user' => 'wesley',
-            'password' => 'e46a73d1',
+            'dbname' => $_ENV['DATABASE_NAME'],
+            'user' => $_ENV['DB_USERNAME'],
+            'password' => $_ENV['DB_PASSWORD'],
             'charset' => 'utf8mb4',
         ];
 
