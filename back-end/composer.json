@@ -15,7 +15,6 @@
     "ext-fileinfo": "*",
     "psr/http-server-handler": "^1.0",
     "php-di/php-di": "^6.4",
-    "guzzlehttp/guzzle": "^7.0",
     "doctrine/orm": "^3",
     "doctrine/dbal": "^4",
     "symfony/cache": "^7",
