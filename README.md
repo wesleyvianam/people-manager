@@ -12,7 +12,8 @@ Front-end
 * Tailwind 3.4
 
 ## Requisitos do Projeto:
-    - Docker && Docker compose 
+ * Docker && Docker compose [Documentação](https://docs.docker.com/engine/install/) 
+
 ## Configuração do Projeto:
 1 - Clone o projeto em sua maquina.
 ```bash
