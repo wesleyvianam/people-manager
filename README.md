@@ -20,7 +20,7 @@ Front-end
 ## Instalação e Inicialização:
 1 - Clone o projeto em sua maquina.
 ```bash
-    git@github.com:wesleyvianam/people-manager.git
+git clone git@github.com:wesleyvianam/people-manager.git
 ```
 
 2 - Configurando Variáveis de Ambiente: Clonar arquivo ".env.example" com o nome ".env" na raiz do projeto e alterar as credenciais:
@@ -31,12 +31,12 @@ Front-end
 
 3 - Na raiz do projeto rode o comando "docker compose up -d" para instalar e inicializar o projeto:
 ```bash
-    docker compose up -d
+docker compose up -d
 ```
 O projeto irá inicializar a **API** na porta http://localhost:8080 e o **Front-end** na porta http://localhost:4200
 
 4 - Para executar as migrações e criar as tabelas no banco de dados, rode o comando:
 ```bash
-  docker exec -it api /usr/local/bin/php vendor/bin/doctrine-migrations migrations:migrate
+docker exec -it api /usr/local/bin/php vendor/bin/doctrine-migrations migrations:migrate
 ```
 
