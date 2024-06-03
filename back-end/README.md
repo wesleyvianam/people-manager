@@ -1,5 +1,6 @@
 # Api - People Manager
-O People Manager é uma API RESTful PHP desenvolvida sem framework.
+O People Manager é uma API RESTful PHP desenvolvida sem framework
+* A aplicação esta disponível na posta http://localhost:8080/api/
 
 ## Tecnologias
 + PHP 8.2
