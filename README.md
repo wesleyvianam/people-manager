@@ -1,5 +1,6 @@
-# people-manager
+# PM - People Manager
 
+---
 ## Sobre o projeto:
 Back-end
 * PHP 8.2
@@ -11,10 +12,12 @@ Front-end
 * React 18.2
 * Tailwind 3.4
 
+--- 
 ## Requisitos do Projeto:
  * Docker && Docker compose [Documentação](https://docs.docker.com/engine/install/) 
 
-## Configuração do Projeto:
+--- 
+## Instalação e Inicialização:
 1 - Clone o projeto em sua maquina.
 ```bash
     git@github.com:wesleyvianam/people-manager.git
