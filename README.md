@@ -1,6 +1,7 @@
 # PM - People Manager
 
----
+People manager é um software de gestão de pessoas desenvolvimento em PHP 8.2 sem a utilização de Frameworks, e ReactJs 18.2
+
 ## Sobre o projeto:
 Back-end
 * PHP 8.2
@@ -39,4 +40,8 @@ O projeto irá inicializar a **API** na porta http://localhost:8080/api/person e
 ```bash
 docker exec -it api /usr/local/bin/php vendor/bin/doctrine-migrations migrations:migrate
 ```
+
+---
+## Para acessar a documentação da API
+* [Documentação](https://github.com/wesleyvianam/people-manager/blob/main/back-end/README.md)
 
