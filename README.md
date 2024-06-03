@@ -29,13 +29,13 @@ git clone git@github.com:wesleyvianam/people-manager.git
       DB_PASSWORD="password"
       DATABASE_NAME="nome_do_database"
 
-3 - Na raiz do projeto rode o comando "docker compose up -d" para instalar e inicializar o projeto:
+3 - Na raiz do projeto execute o docker compose para instalar e inicializar o projeto:
 ```bash
 docker compose up -d
 ```
-O projeto irá inicializar a **API** na porta http://localhost:8080 e o **Front-end** na porta http://localhost:4200
+O projeto irá inicializar a **API** na porta http://localhost:8080/api/person e o **Front-end** na porta http://localhost:4200
 
-4 - Para executar as migrações e criar as tabelas no banco de dados, rode o comando:
+4 - Para executar as migrações e criar as tabelas no banco de dados, execute o comando:
 ```bash
 docker exec -it api /usr/local/bin/php vendor/bin/doctrine-migrations migrations:migrate
 ```
